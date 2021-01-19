@@ -11,11 +11,12 @@ import { Category } from './category.model';
 })
 export class CategoryService {
 
-  private apiPath = 'api/categories';
+  private apiPath: string = 'api/categories';
 
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Category[]> {
+    console.log('passou aqui');
     return this.http.get(this.apiPath).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategories)
@@ -48,7 +49,7 @@ export class CategoryService {
   }
 
   delete(id: number): Observable<any> {
-    const url =  `${this.apiPath}/${category.id}`;
+    const url =  `${this.apiPath}/${id}`;
 
     return this.http.delete(url).pipe(
       catchError(this.handleError),
@@ -59,6 +60,7 @@ export class CategoryService {
   // PRIVATE METHODS
 
   private jsonDataToCategories(jsonData: any[]): Category[] {
+    console.log('passou no json');
     const categories: Category[] = [];
     jsonData.forEach(element => categories.push(element as Category));
 
