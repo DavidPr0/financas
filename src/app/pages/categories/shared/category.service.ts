@@ -16,7 +16,6 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Category[]> {
-    console.log('passou aqui');
     return this.http.get(this.apiPath).pipe(
       catchError(this.handleError),
       map(this.jsonDataToCategories)
@@ -60,7 +59,6 @@ export class CategoryService {
   // PRIVATE METHODS
 
   private jsonDataToCategories(jsonData: any[]): Category[] {
-    console.log('passou no json');
     const categories: Category[] = [];
     jsonData.forEach(element => categories.push(element as Category));
 
